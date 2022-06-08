@@ -1,3 +1,4 @@
+import { Outlet, Link } from 'react-router-dom';
 import CategoriesList from '../../components/categories-list/categories-list.component';
 import '../../components/categories-list/categories-list.styles.scss';
 
@@ -29,7 +30,12 @@ function Home() {
       imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
     },
   ];
-  return <CategoriesList categories={categories} />;
+  return (
+    <div>
+      <Outlet />
+      <CategoriesList categories={categories} />
+    </div>
+  );
 }
 
 export default Home;
