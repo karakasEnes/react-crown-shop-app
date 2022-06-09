@@ -32,9 +32,28 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 export const db = getFirestore();
 export const createUserDocumentFromAuth = async (userAuth) => {
   const userDocRef = doc(db, 'users', userAuth.uid);
-  console.log(userDocRef);
+  console.log('userDocRef', userDocRef);
 
   const userSnapShot = await getDoc(userDocRef);
-  console.log(userSnapShot);
+  console.log('userSnapshot ', userSnapShot);
   console.log(userSnapShot.exists());
+
+  //user doesn'T exist!
+  if (!userSnapShot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await setDoc(userDocRef, {
+        displayName,
+        email,
+        createdAt,
+      });
+    } catch (e) {
+      console.log('error while creating the user!', e.message);
+    }
+  }
+
+  //user exists!
+  return userDocRef;
 };
