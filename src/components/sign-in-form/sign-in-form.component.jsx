@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../../contexts/user.context';
 import {
   createUserDocumentFromAuth,
   signInWithGooglePopup,
@@ -13,6 +14,7 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  const { setCurrentUser } = useContext(UserContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
@@ -39,7 +41,7 @@ const SignInForm = () => {
       );
 
       resetFormFields();
-      console.log(response);
+      setCurrentUser(response.user);
       alert('signed succed');
     } catch (e) {
       if (e.code === 'auth/wrong-password') {
