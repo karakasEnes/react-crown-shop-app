@@ -1,4 +1,8 @@
 .cart-dropdown-container {
+  &.hidden {
+    display: none;
+  }
+
   position: absolute;
   width: 240px;
   height: 340px;
