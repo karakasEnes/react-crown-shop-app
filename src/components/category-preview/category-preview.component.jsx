@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ProductCard from '../product-card/product-card.component';
-
+import './category-preview.styles.scss';
 const CategoryPreview = ({ products: comingProducts, title }) => {
   const [products, setProducts] = useState([]);
 
