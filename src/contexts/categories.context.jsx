@@ -10,7 +10,7 @@ export const CategoriesProvider = ({ children }) => {
   const value = { categoriesMap, setCategoriesMap };
 
   useEffect(() => {
-    // getting our categories collection
+    // getting our categories collection from firestore
     const getCategoriesMapData = async () => {
       const categoryMapDataByFireStore = await getCategoriesAndDocuments();
 
@@ -30,8 +30,6 @@ export const CategoriesProvider = ({ children }) => {
 
     getCategoriesMapData();
   }, []);
-
-  console.log('categoriesMap......', categoriesMap);
 
   return (
     <CategoriesContext.Provider value={value}>
