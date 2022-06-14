@@ -1,5 +1,5 @@
 import { Fragment, useContext } from 'react';
-import ProductCard from '../../components/product-card/product-card.component';
+import CategoryPreview from '../../components/category-preview/category-preview.component.jsx';
 import { CategoriesContext } from '../../contexts/categories.context';
 import './shop.styles.scss';
 
@@ -7,23 +7,23 @@ const Shop = () => {
   const { categoriesMap } = useContext(CategoriesContext);
   const CATEGORIES_KEYS = ['jackets', 'hats', 'mens', 'sneakers', 'womens'];
 
+  const bestMap = Object.keys(categoriesMap).reduce((acc, key) => {
+    if (CATEGORIES_KEYS.includes(key)) {
+      acc[key] = categoriesMap[key];
+    }
+    return acc;
+  }, {});
+
   return (
     <Fragment>
-      {Object.keys(categoriesMap).map((title, idx) => {
-        if (CATEGORIES_KEYS.includes(title)) {
-          return (
-            <Fragment key={idx}>
-              <h2>{title}</h2>
-
-              <div className='products-container'>
-                {categoriesMap[title].map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            </Fragment>
-          );
-        }
-        return false; // optional in my opinion
+      {Object.keys(bestMap).map((title, idx) => {
+        return (
+          <CategoryPreview
+            key={idx + title + title}
+            title={title}
+            products={categoriesMap[title]}
+          />
+        );
       })}
     </Fragment>
   );
