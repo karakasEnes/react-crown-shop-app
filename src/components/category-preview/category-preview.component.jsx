@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProductCard from '../product-card/product-card.component';
 import './category-preview.styles.scss';
+
 const CategoryPreview = ({ products: comingProducts, title }) => {
   const [products, setProducts] = useState([]);
 
@@ -13,7 +15,12 @@ const CategoryPreview = ({ products: comingProducts, title }) => {
 
   return (
     <div className='category-preview-container'>
-      <h2>{title}</h2>
+      <h2>
+        <Link className='title' to={title}>
+          {title.toUpperCase()}
+        </Link>
+      </h2>
+
       <div className='products-container'>
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
