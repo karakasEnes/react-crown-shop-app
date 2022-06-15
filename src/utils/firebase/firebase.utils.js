@@ -108,7 +108,6 @@ export const initializeFirebaseDatabase = async (
   });
 
   await batch.commit();
-  console.log('your db firebase initialization is done!..');
 };
 
 export const getCategoriesAndDocuments = async () => {

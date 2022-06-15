@@ -6,7 +6,7 @@ import {
 } from '../../utils/firebase/firebase.utils';
 import Button, { BUTTON_STYLE_CLASSES } from '../button/button.component';
 import FormInput from '../form-input/form-input.component';
-import './sign-in-form.styles.scss';
+import { ButtonContainer, SignInContainer } from './sign-in-form.styles.jsx';
 const defaultFormFields = {
   email: '',
   password: '',
@@ -25,7 +25,6 @@ const SignInForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  // console.log('formFields', formFields);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -52,7 +51,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className='sign-up-container'>
+    <SignInContainer>
       <h2>Already have any account?</h2>
       <span>Sign IN with email and password</span>
       <form onSubmit={handleSubmit}>
@@ -74,7 +73,7 @@ const SignInForm = () => {
           value={password}
         />
 
-        <div className='buttons-container'>
+        <ButtonContainer>
           <Button type='submit'>Sign In</Button>
           <Button
             type='button'
@@ -83,9 +82,9 @@ const SignInForm = () => {
           >
             Google Sign In
           </Button>
-        </div>
+        </ButtonContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
