@@ -7,12 +7,18 @@ import {
 } from './checkout-item.styles';
 
 const CheckoutItem = ({ cartItem }) => {
-  const { productQuantityIncreaseOrDecrease, removeItemFromCartItems } =
-    useContext(CartContext);
+  const {
+    increaseProductQuantity,
+    decreaseProductQuantity,
+    removeItemFromCartItems,
+  } = useContext(CartContext);
   const { name, quantity, price, imageUrl } = cartItem;
 
-  const handleIncreaseAndDecrease = (isIncrease) => {
-    productQuantityIncreaseOrDecrease(cartItem, isIncrease);
+  const handleIncreaseQuantity = () => {
+    increaseProductQuantity(cartItem);
+  };
+  const handleDecreaseQuantity = () => {
+    decreaseProductQuantity(cartItem);
   };
 
   const handleRemoveCartItem = () => {
@@ -26,13 +32,13 @@ const CheckoutItem = ({ cartItem }) => {
       </div>
       <BaseSpan>{name}</BaseSpan>
       <QuantitySpan>
-        <div onClick={() => handleIncreaseAndDecrease()} className='arrow'>
+        <div onClick={handleDecreaseQuantity} className='arrow'>
           &#10094;
         </div>
 
         <span className='value'>{quantity}</span>
 
-        <div onClick={() => handleIncreaseAndDecrease(true)} className='arrow'>
+        <div onClick={handleIncreaseQuantity} className='arrow'>
           &#10095;
         </div>
       </QuantitySpan>
