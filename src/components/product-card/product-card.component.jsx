@@ -11,10 +11,10 @@ import {
 const ProductCard = ({ product }) => {
   const { imageUrl, price, name } = product;
 
-  const { addItemToCart } = useContext(CartContext);
+  const { handleAddCartToList } = useContext(CartContext);
 
   const handleAddingToCart = () => {
-    addItemToCart(product);
+    handleAddCartToList(product);
   };
   return (
     <ProductCardContainer>

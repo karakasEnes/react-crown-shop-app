@@ -8,21 +8,21 @@ import {
 
 const CheckoutItem = ({ cartItem }) => {
   const {
-    increaseProductQuantity,
-    decreaseProductQuantity,
-    removeItemFromCartItems,
+    handleGetRidOfCartFromCartList,
+    handleAddCartToList,
+    handleRemoveCartFromList,
   } = useContext(CartContext);
   const { name, quantity, price, imageUrl } = cartItem;
 
   const handleIncreaseQuantity = () => {
-    increaseProductQuantity(cartItem);
+    handleAddCartToList(cartItem);
   };
   const handleDecreaseQuantity = () => {
-    decreaseProductQuantity(cartItem);
+    handleRemoveCartFromList(cartItem);
   };
 
-  const handleRemoveCartItem = () => {
-    removeItemFromCartItems(cartItem);
+  const handleRidCart = () => {
+    handleGetRidOfCartFromCartList(cartItem);
   };
 
   return (
@@ -43,7 +43,7 @@ const CheckoutItem = ({ cartItem }) => {
         </div>
       </QuantitySpan>
       <BaseSpan>{price}</BaseSpan>
-      <div onClick={handleRemoveCartItem} className='remove-button'>
+      <div onClick={handleRidCart} className='remove-button'>
         &#10005;
       </div>
     </CheckoutItemContainer>
