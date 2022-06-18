@@ -10,7 +10,7 @@ import {
   createUserDocumentFromAuth,
   onAuthStateChangedListener,
 } from './utils/firebase/firebase.utils';
-import { setCurrentUser } from './store/user.action';
+import { setCurrentUser } from './store/user/user.action';
 
 function App() {
   const dispatch = useDispatch();
