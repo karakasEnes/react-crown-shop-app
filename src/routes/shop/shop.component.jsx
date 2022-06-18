@@ -4,7 +4,7 @@ import CategoriesPreview from '../categories-preview/categories-preview.componen
 import Category from '../category/category.component';
 import { useDispatch } from 'react-redux';
 import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
-import { setCategoriesMap } from '../../store/categories/category.action';
+import { setCategories } from '../../store/categories/category.action';
 
 const Shop = () => {
   const dispatch = useDispatch();
@@ -12,20 +12,23 @@ const Shop = () => {
   useEffect(() => {
     // getting our categories collection from firestore
     const getCategoriesMapData = async () => {
-      const categoryMapDataByFireStore = await getCategoriesAndDocuments();
+      // const categoryMapDataByFireStore = await getCategoriesAndDocuments();
+      const categoriesArrayDataByFireStore = await getCategoriesAndDocuments();
 
-      const CATEGORIES_KEYS = ['jackets', 'mens', 'sneakers', 'womens', 'hats'];
-      const fixedCategoryData = Object.keys(categoryMapDataByFireStore).reduce(
-        (acc, key) => {
-          if (CATEGORIES_KEYS.includes(key)) {
-            acc[key] = categoryMapDataByFireStore[key];
-          }
-          return acc;
-        },
-        {}
-      );
+      console.log(categoriesArrayDataByFireStore);
 
-      dispatch(setCategoriesMap(fixedCategoryData));
+      // const CATEGORIES_KEYS = ['jackets', 'mens', 'sneakers', 'womens', 'hats'];
+      // const fixedCategoryData = Object.keys(categoryMapDataByFireStore).reduce(
+      //   (acc, key) => {
+      //     if (CATEGORIES_KEYS.includes(key)) {
+      //       acc[key] = categoryMapDataByFireStore[key];
+      //     }
+      //     return acc;
+      //   },
+      //   {}
+      // );
+
+      dispatch(setCategories(categoriesArrayDataByFireStore));
     };
 
     getCategoriesMapData();
