@@ -15,8 +15,6 @@ const Shop = () => {
       // const categoryMapDataByFireStore = await getCategoriesAndDocuments();
       const categoriesArrayDataByFireStore = await getCategoriesAndDocuments();
 
-      console.log(categoriesArrayDataByFireStore);
-
       // const CATEGORIES_KEYS = ['jackets', 'mens', 'sneakers', 'womens', 'hats'];
       // const fixedCategoryData = Object.keys(categoryMapDataByFireStore).reduce(
       //   (acc, key) => {
@@ -32,7 +30,7 @@ const Shop = () => {
     };
 
     getCategoriesMapData();
-  }, [dispatch]);
+  }, []);
   return (
     <Routes>
       <Route index element={<CategoriesPreview />} />
