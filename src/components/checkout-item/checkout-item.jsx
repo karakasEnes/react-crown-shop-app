@@ -1,28 +1,33 @@
-import { useContext } from 'react';
-import { CartContext } from '../../contexts/cart.context';
+import {
+  handleAddCartToList,
+  handleGetRidOfCartFromCartList,
+  handleRemoveCartFromList,
+} from '../../store/cart/cart.actions';
+
 import {
   CheckoutItemContainer,
   BaseSpan,
   QuantitySpan,
 } from './checkout-item.styles';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCartItems } from '../../store/cart/cart.selector';
+
 const CheckoutItem = ({ cartItem }) => {
-  const {
-    handleGetRidOfCartFromCartList,
-    handleAddCartToList,
-    handleRemoveCartFromList,
-  } = useContext(CartContext);
+  const dispatch = useDispatch();
   const { name, quantity, price, imageUrl } = cartItem;
 
+  const cartItems = useSelector(selectCartItems);
+
   const handleIncreaseQuantity = () => {
-    handleAddCartToList(cartItem);
+    dispatch(handleAddCartToList(cartItem, cartItems));
   };
   const handleDecreaseQuantity = () => {
-    handleRemoveCartFromList(cartItem);
+    dispatch(handleRemoveCartFromList(cartItem, cartItems));
   };
 
   const handleRidCart = () => {
-    handleGetRidOfCartFromCartList(cartItem);
+    dispatch(handleGetRidOfCartFromCartList(cartItem, cartItems));
   };
 
   return (
