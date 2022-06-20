@@ -46,6 +46,21 @@ export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
+export const initializeFirebaseDatabase = async (
+  collectionName,
+  documentsToAdd
+) => {
+  // this function should be run only once to setup our DB.
+  const collectionRef = collection(db, collectionName);
+  const batch = writeBatch(db);
+
+  documentsToAdd.forEach((document) => {
+    const docRef = doc(collectionRef, document.title.toLowerCase());
+    batch.set(docRef, document);
+  });
+
+  await batch.commit();
+};
 export const createUserDocumentFromAuth = async (
   userAuth,
   additionalInformation = {}
@@ -90,26 +105,6 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 
-export const onAuthStateChangedListener = (callback) => {
-  onAuthStateChanged(auth, callback);
-};
-
-export const initializeFirebaseDatabase = async (
-  collectionName,
-  documentsToAdd
-) => {
-  // this function should be run only once to setup our DB.
-  const collectionRef = collection(db, collectionName);
-  const batch = writeBatch(db);
-
-  documentsToAdd.forEach((document) => {
-    const docRef = doc(collectionRef, document.title.toLowerCase());
-    batch.set(docRef, document);
-  });
-
-  await batch.commit();
-};
-
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
@@ -119,13 +114,22 @@ export const getCategoriesAndDocuments = async () => {
   const categoriesArray = querySnapShot.docs.map((docSnapShot) =>
     docSnapShot.data()
   );
-
-  // const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
-  //   const { title, items } = docSnapShot.data();
-  //   acc[title.toLowerCase()] = items;
-  //   return acc;
-  // }, {});
-
-  // return categoryMap;
   return categoriesArray;
+};
+
+export const onAuthStateChangedListener = (callback) => {
+  onAuthStateChanged(auth, callback);
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubsribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubsribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 };
