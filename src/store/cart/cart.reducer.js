@@ -11,10 +11,10 @@ export const cartReducer = (state = CART_INITIAL_VALUE, action = {}) => {
   const { type, payload } = action;
 
   switch (type) {
-    case CART_ACTION_TYPES.UPDATE_CARTITEMS_TOTALPRICE_CARTCOUNT:
+    case CART_ACTION_TYPES.UPDATE_CARTITEMS:
       return {
         ...state,
-        ...payload,
+        cartItems: payload,
       };
 
     case CART_ACTION_TYPES.CHANGE_CART_OPEN:

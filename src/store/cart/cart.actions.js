@@ -42,23 +42,7 @@ const ridOfCartFromCartItemsArray = (cartToRid, oldCartItems) => {
 };
 
 //util for handlers
-const updateMultiValuesInState = (newCartItems) => {
-  const cartCount = newCartItems.reduce((acc, cart) => {
-    acc = cart.quantity + acc;
-    return acc;
-  }, 0);
 
-  const totalPrice = newCartItems.reduce((acc, cart) => {
-    acc = acc + cart.quantity * cart.price;
-    return acc;
-  }, 0);
-
-  return createAction(CART_ACTION_TYPES.UPDATE_CARTITEMS_TOTALPRICE_CARTCOUNT, {
-    cartItems: newCartItems,
-    cartCount,
-    totalPrice,
-  });
-};
 //(actions)
 
 export const setIsCartOpen = (boolean) => {
@@ -66,16 +50,16 @@ export const setIsCartOpen = (boolean) => {
 };
 export const handleAddCartToList = (cartToAdd, cartItems) => {
   const newCartItems = addCartItemToCartItemsArray(cartToAdd, cartItems);
-  return updateMultiValuesInState(newCartItems);
+  return createAction(CART_ACTION_TYPES.UPDATE_CARTITEMS, newCartItems);
 };
 
 export const handleRemoveCartFromList = (cartToRemove, cartItems) => {
   const newCartItems = removeCartItemToCartItemsArray(cartToRemove, cartItems);
 
-  return updateMultiValuesInState(newCartItems);
+  return createAction(CART_ACTION_TYPES.UPDATE_CARTITEMS, newCartItems);
 };
 
 export const handleGetRidOfCartFromCartList = (cartToRidOf, cartItems) => {
   const newCartItems = ridOfCartFromCartItemsArray(cartToRidOf, cartItems);
-  return updateMultiValuesInState(newCartItems);
+  return createAction(CART_ACTION_TYPES.UPDATE_CARTITEMS, newCartItems);
 };

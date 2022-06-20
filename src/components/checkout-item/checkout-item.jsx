@@ -19,17 +19,12 @@ const CheckoutItem = ({ cartItem }) => {
 
   const cartItems = useSelector(selectCartItems);
 
-  const handleIncreaseQuantity = () => {
+  const handleIncreaseQuantity = () =>
     dispatch(handleAddCartToList(cartItem, cartItems));
-  };
-  const handleDecreaseQuantity = () => {
+  const handleDecreaseQuantity = () =>
     dispatch(handleRemoveCartFromList(cartItem, cartItems));
-  };
-
-  const handleRidCart = () => {
+  const handleRidCart = () =>
     dispatch(handleGetRidOfCartFromCartList(cartItem, cartItems));
-  };
-
   return (
     <CheckoutItemContainer>
       <div className='image-container'>
