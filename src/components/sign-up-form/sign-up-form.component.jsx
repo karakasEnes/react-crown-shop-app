@@ -35,11 +35,11 @@ const SignUpForm = () => {
       dispatch(signUpStart(email, password, displayName));
 
       resetFormFields();
-    } catch (e) {
-      if (e.code === 'auth/email-already-in-use') {
+    } catch (err) {
+      if (err.code === 'auth/email-already-in-use') {
         alert('cannot create user, email already in use!');
       } else {
-        console.log('user creation failed! ', e.message);
+        console.log('user creation failed! ', err.message);
       }
     }
   };

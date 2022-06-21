@@ -36,8 +36,8 @@ const SignInForm = () => {
       resetFormFields();
 
       alert('signed succed');
-    } catch (e) {
-      if (e.code === 'auth/wrong-password') {
+    } catch (err) {
+      if (err.code === 'auth/wrong-password') {
         alert('Email or Password wrong!');
       }
     }
