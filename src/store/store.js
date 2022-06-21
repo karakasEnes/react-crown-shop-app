@@ -15,14 +15,19 @@ const persistConfig = {
 const sagaMiddleware = createSagaMiddleware();
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// const middleWares = [
+//   process.env.NODE_ENV !== 'production' && logger,
+
+//   (process.env.NODE_ENV !== 'production' &&
+//     window &&
+//     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+//     sagaMiddleware) ||
+//     false,
+// ].filter(Boolean);
+
 const middleWares = [
   process.env.NODE_ENV !== 'production' && logger,
-
-  (process.env.NODE_ENV !== 'production' &&
-    window &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-    sagaMiddleware) ||
-    false,
+  sagaMiddleware,
 ].filter(Boolean);
 
 export const store = configureStore({
