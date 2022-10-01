@@ -7,7 +7,7 @@ import createSagaMiddleware from 'redux-saga';
 import { rootSaga } from './root-saga';
 
 const persistConfig = {
-  key: 'root',
+  key: 'rootReducer',
   storage,
   whitelist: ['cart'],
 };
