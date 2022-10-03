@@ -16,3 +16,7 @@ export type CategoryT = {
   imageUrl: string;
   items: CategoryItemT[];
 };
+
+export type CategoryMapT = {
+  [key: string]: CategoryItemT[];
+};
