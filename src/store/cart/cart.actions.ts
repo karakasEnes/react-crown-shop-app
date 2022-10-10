@@ -65,7 +65,7 @@ export const setIsCartOpen = withMatcher((boolean: boolean): SetIsCartOpenT => {
   return createAction(CART_ACTION_TYPES.CHANGE_CART_OPEN, boolean);
 });
 
-export const helperCreateAction = withMatcher(
+export const updateCartItems = withMatcher(
   (cartItems: CartItemT[]): UpdateCartItemsT =>
     createAction(CART_ACTION_TYPES.UPDATE_CARTITEMS, cartItems)
 );
@@ -75,7 +75,7 @@ export const handleAddCartToList = (
   cartItems: CartItemT[]
 ) => {
   const newCartItems = addCartItemToCartItemsArray(cartToAdd, cartItems);
-  return helperCreateAction(newCartItems);
+  return updateCartItems(newCartItems);
 };
 
 export const handleRemoveCartFromList = (
@@ -84,7 +84,7 @@ export const handleRemoveCartFromList = (
 ) => {
   const newCartItems = removeCartItemToCartItemsArray(cartToRemove, cartItems);
 
-  return helperCreateAction(newCartItems);
+  return updateCartItems(newCartItems);
 };
 
 export const handleGetRidOfCartFromCartList = (
@@ -92,7 +92,7 @@ export const handleGetRidOfCartFromCartList = (
   cartItems: CartItemT[]
 ) => {
   const newCartItems = ridOfCartFromCartItemsArray(cartToRidOf, cartItems);
-  return helperCreateAction(newCartItems);
+  return updateCartItems(newCartItems);
 };
 
 //new Action with TS..
